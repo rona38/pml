@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>Prediction Assignment Writeup</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h1>Prediction Assignment Writeup</h1>
+
+<h2>Introduction</h2>
+
+<p>This is course project assignment of Practical Machine Learning. </p>
+
+<h2>Background</h2>
+
+<p>Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement - a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, your goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants. They were asked to perform barbell lifts correctly and incorrectly in 5 different ways. More information is available from the website here: <a href="http://groupware.les.inf.puc-rio.br/har">http://groupware.les.inf.puc-rio.br/har</a> (see the section on the Weight Lifting Exercise Dataset). </p>
+
+<h2>Goal</h2>
+
+<p>The goal of this project is to predict the manner in which they did the exercise. This is the &ldquo;classe&rdquo; variable in the training set. The exercises are categorized in classe: A, B, C, D, E.
+Any other variables are allowed to be used as features to predict which exercises are measured.
+The prediction model must be able to predict 20 different test cases.</p>
+
+<h2>Analysis</h2>
+
+<h3>Training data</h3>
+
+<p>The training data consists of 160 variables that are obtains from the accelerometers on the belt,forearm, arm and dumbbel of the participants. Many of the columns has NA or empty value. The first step will be discarding those columns. The remaining columns is about 60 columns. The next step is removing the columns that are not a accelerometer measurement. That is the first 7 columns.The remaining 53 columns will be used in the training data. The training data are splits into 70% training data and 30% cross validation data.</p>
+
+<h3>Prediction.</h3>
+
+<p>To get the best predictor comparison has been made with differents methods. The accuracy of each prediction models is compared to each other. The selected prediction models are:</p>
+
+<ol>
+<li>CART</li>
+<li>RandomForest.</li>
+<li>Generalized Boosting model</li>
+<li>Model prediction model.</li>
+</ol>
+
+<h3>Prediction model Accuracy</h3>
+
+<p>The prediction models validated tested again the cross validation data. The following table shows the accuracy of each model. The results are obtained by calling the Confusion matrix again the cross validation data.</p>
+
+<table><thead>
+<tr>
+<th>Prediction model</th>
+<th>Accuracy</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CART</td>
+<td>50.29%</td>
+</tr>
+<tr>
+<td>RandomForest</td>
+<td>100.0%</td>
+</tr>
+<tr>
+<td>Generalized Boosting model</td>
+<td>97.29%</td>
+</tr>
+<tr>
+<td>Model prediction model</td>
+<td>69.91%</td>
+</tr>
+</tbody></table>
+
+<h3>The Winner is RandomForest</h3>
+
+<p>Based on the result we get from the evaluation. The random forest method is used to predict the test set. The result is 20/20 as according to the evaluation.</p>
+
+</body>
+
+</html>
+
